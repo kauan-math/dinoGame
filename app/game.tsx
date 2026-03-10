@@ -21,7 +21,7 @@ export default function GameScreen() {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => spawnObstacles(), 6000);
+    const interval = setInterval(() => spawnObstacles(), 4000);
 
     return () => clearInterval(interval);
   }, []);

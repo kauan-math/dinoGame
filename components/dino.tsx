@@ -3,14 +3,12 @@ import { useEffect } from "react";
 import { Easing, Image, StyleSheet } from "react-native";
 import Animated, {
   useAnimatedStyle,
-  useSharedValue,
   withSequence,
   withTiming,
 } from "react-native-reanimated";
 
 export default function Dino() {
-  const { jumping, stopJump } = useGame();
-  const dinoHeight = useSharedValue(0);
+  const { jumping, stopJump, dinoHeight } = useGame();
 
   function Handlejump() {
     dinoHeight.value = withSequence(
@@ -49,7 +47,7 @@ export default function Dino() {
     <Animated.View style={[s.dino, animatedStyle]}>
       {jumping ? (
         <Image
-          source={require("@/assets/images/spider6.gif")}
+          source={require("@/assets/images/gif.gif")}
           resizeMode="contain"
           style={s.image}
         />
@@ -71,10 +69,11 @@ const s = StyleSheet.create({
     position: "absolute",
     zIndex: 10,
     top: "30%",
+    left: 25,
   },
   image: {
-    width: 250,
-    height: 300,
+    width: 200,
+    height: 200,
     right: 10,
     top: 80,
   },
