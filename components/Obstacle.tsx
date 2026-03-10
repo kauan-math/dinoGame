@@ -1,8 +1,6 @@
-import {
-  default as MovingSpiderBitmap,
-  default as spiderJumpingBitmap,
-} from "@/assets/bitmaps/spiderjump10.json";
-import venomBitmap from "@/assets/bitmaps/venom10.json";
+import { default as MovingSpiderBitmap } from "@/assets/bitmaps/spider100.json";
+import { default as spiderJumpingBitmap } from "@/assets/bitmaps/spiderJump100.json";
+import { default as venomBitmap } from "@/assets/bitmaps/venom100.json";
 import { useGame } from "@/hooks/gameHook";
 import { router } from "expo-router";
 import { useEffect } from "react";
@@ -41,32 +39,34 @@ export default function Obstacle({ onEnd }: any) {
     },
     (currentValue) => {
       const ObstaclePosition = width - Math.round(currentValue);
-      const left = Math.max(25, width - ObstaclePosition);
-      const right = Math.min(100, width - currentValue + 125);
-      const bottom = Math.max(0, dinoHeight.value);
-      const top = 125;
+      const dinoPosition = -Math.round(dinoHeight.value);
+      const left = Math.max(25, ObstaclePosition);
+      const right = Math.min(125, ObstaclePosition + 100);
+      const bottom = Math.max(0, dinoPosition);
+      const top = 100;
       if (left > right || bottom > top) {
         return;
       }
+      console.log(left, right, top, bottom);
 
       for (let x = left; x < right; x++) {
         for (let y = bottom; y < top; y++) {
           const xDino = x - 25;
           const xObstacle = x - ObstaclePosition;
-          const yDino = 100 - (y - dinoHeight.value);
-          const yObstacle = 125 - y;
+          const yDino = 100 - (y - dinoPosition);
+          const yObstacle = 100 - y;
 
           const dinoBitmap =
             dinoHeight.value > 0 ? spiderJumpingBitmap : MovingSpiderBitmap;
 
           if (
-            xDino > 100 &&
+            xDino < 100 &&
             xDino > -1 &&
             yDino < 100 &&
             yDino > -1 &&
-            xObstacle < 125 &&
+            xObstacle < 135 &&
             xObstacle > -1 &&
-            yObstacle < 125 &&
+            yObstacle < 100 &&
             yObstacle > -1 &&
             dinoBitmap[xDino][yDino] &&
             venomBitmap[xObstacle][yObstacle]
@@ -95,10 +95,10 @@ const s = StyleSheet.create({
     height: "100%",
   },
   obstacles: {
-    width: 125,
-    height: 200,
+    width: 135,
+    height: 100,
     position: "absolute",
-    top: 250,
+    bottom: 0,
     right: 0,
   },
 });

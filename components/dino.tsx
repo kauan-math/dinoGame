@@ -12,14 +12,14 @@ export default function Dino() {
 
   function Handlejump() {
     dinoHeight.value = withSequence(
-      withTiming(-100, {
-        duration: 350,
+      withTiming(-200, {
+        duration: 500,
         easing: Easing.linear,
       }),
       withTiming(
         0,
         {
-          duration: 200,
+          duration: 800,
           easing: Easing.linear,
         },
         () => {
@@ -53,9 +53,9 @@ export default function Dino() {
         />
       ) : (
         <Image
-          source={require("@/assets/images/spider4.gif")}
+          source={require("@/assets/images/spider10.gif")}
           resizeMode="contain"
-          style={s.image2}
+          style={s.image}
         />
       )}
     </Animated.View>
@@ -65,21 +65,14 @@ export default function Dino() {
 const s = StyleSheet.create({
   dino: {
     width: 100,
-    height: 200,
+    height: 100,
     position: "absolute",
     zIndex: 10,
-    top: "30%",
+    bottom: 0,
     left: 25,
   },
   image: {
-    width: 200,
-    height: 200,
-    right: 10,
-    top: 80,
-  },
-  image2: {
-    width: 100,
-    height: 200,
-    top: 120,
+    width: "100%",
+    height: "100%",
   },
 });
